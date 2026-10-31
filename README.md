@@ -1,6 +1,10 @@
-# Portfolio — Desarrollador Full Stack .NET
+# Portfolio — Juan Pablo Torasso
 
 Portfolio profesional construido con **Next.js (App Router)**, **React** y **JavaScript**, con estética *Dark Tech Premium*.
+
+🌐 **Sitio publicado:** https://portfolio-gamma-rose-y5fd75nqah.vercel.app
+
+Cada cambio que se sube a la rama `main` se publica automáticamente en Vercel.
 
 ## Requisitos
 
