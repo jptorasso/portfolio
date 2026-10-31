@@ -42,3 +42,6 @@ next-env.d.ts
 
 # configuración local del editor/asistente
 .claude/
+
+.vercel
+.env*
