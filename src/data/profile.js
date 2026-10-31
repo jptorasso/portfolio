@@ -18,8 +18,8 @@ export const profile = {
   description:
     "Construyo sistemas empresariales robustos con C# y .NET: gestión, stock, ventas y automatizaciones que resuelven problemas reales de negocio. También desarrollo interfaces modernas con JavaScript y React.",
   isAvailable: true,
-  // TODO: tu correo real. Se usa en la sección Contacto y en el formulario.
-  email: "tu-email@ejemplo.com",
+  // Se usa en la sección Contacto y en el formulario.
+  email: "jptorasso@gmail.com",
   socials: [
     { id: "github", label: "GitHub", href: "https://github.com/jptorasso" },
     {
