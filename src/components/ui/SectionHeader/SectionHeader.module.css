@@ -1,0 +1,45 @@
+.header {
+  max-width: 760px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-accent-light);
+}
+
+.eyebrow::after {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--gradient-accent);
+}
+
+.number {
+  color: var(--color-text-subtle);
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.title strong {
+  font-weight: inherit;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.description {
+  max-width: 60ch;
+  margin-top: 1rem;
+  font-size: 1.075rem;
+  color: var(--color-text-muted);
+}

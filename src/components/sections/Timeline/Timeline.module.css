@@ -1,0 +1,283 @@
+.timeline {
+  position: relative;
+  padding-block: clamp(5rem, 10vw, 8rem);
+}
+
+.tabsWrapper {
+  max-width: 640px;
+  margin-top: 2.5rem;
+}
+
+/* ==========================================================================
+   Panel, eje y línea de progreso
+   ========================================================================== */
+.panel {
+  --node-size: 32px;
+  --axis-x: 15px; /* posición del eje en celulares */
+  position: relative;
+  margin-top: 3rem;
+  border-radius: var(--radius-md);
+}
+
+.panel:focus-visible {
+  outline-offset: 8px;
+}
+
+.track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--axis-x);
+  width: 2px;
+  border-radius: 2px;
+  background: var(--color-border);
+}
+
+/* Se llena de arriba hacia abajo: el JS cambia su scaleY entre 0 y 1 */
+.progress {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, #a78bfa, #818cf8, #60a5fa);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.list {
+  display: grid;
+  gap: 2rem;
+}
+
+/* ==========================================================================
+   Hito
+   ========================================================================== */
+.item {
+  position: relative;
+  padding-left: calc(var(--axis-x) + var(--node-size) + 0.5rem);
+  opacity: 0;
+  transform: translateX(-16px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+.item[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.node {
+  position: absolute;
+  top: 1.4rem;
+  left: calc(var(--axis-x) + 1px - var(--node-size) / 2);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--node-size);
+  height: var(--node-size);
+  border-radius: 50%;
+  border: 2px solid var(--color-border-strong);
+  background: var(--color-bg);
+  color: var(--color-text-subtle);
+  transition:
+    border-color var(--duration-slow) ease,
+    color var(--duration-slow) ease,
+    box-shadow var(--duration-slow) ease;
+}
+
+/* El nodo se "enciende" cuando el hito aparece en pantalla */
+.item[data-visible="true"] .node {
+  border-color: var(--color-accent-light);
+  color: var(--color-accent-light);
+  box-shadow:
+    0 0 0 4px rgba(139, 92, 246, 0.15),
+    0 0 20px rgba(139, 92, 246, 0.45);
+}
+
+/* ==========================================================================
+   Tarjeta
+   ========================================================================== */
+.card {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition:
+    border-color var(--duration) ease,
+    transform var(--duration) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+.item[data-draft="true"] .card {
+  border-style: dashed;
+  border-color: rgba(251, 191, 36, 0.4);
+  opacity: 0.75;
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.type {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: rgba(139, 92, 246, 0.12);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-accent-light);
+}
+
+.period {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
+.currentDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-success);
+  animation: current-pulse 2s ease-in-out infinite;
+}
+
+@keyframes current-pulse {
+  50% {
+    box-shadow: 0 0 0 5px rgba(52, 211, 153, 0.2);
+  }
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.organization {
+  margin-top: 0.2rem;
+  font-size: 0.925rem;
+  color: var(--color-accent-light);
+}
+
+.description {
+  margin-top: 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.highlights {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.highlights li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent-light);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+}
+
+.tags li {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.credential {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent-light);
+}
+
+.draftNote {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #fbbf24;
+}
+
+/* Sin JavaScript, los hitos se muestran igual */
+@media (scripting: none) {
+  .item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Escritorio: eje al centro y tarjetas alternadas (zigzag)
+   ========================================================================== */
+@media (min-width: 900px) {
+  .panel {
+    --axis-x: 50%;
+  }
+
+  .track {
+    transform: translateX(-1px);
+  }
+
+  .item {
+    width: calc(50% - 2.75rem);
+    padding-left: 0;
+  }
+
+  .item[data-side="left"] {
+    margin-right: auto;
+    transform: translateX(-24px);
+  }
+
+  .item[data-side="right"] {
+    margin-left: auto;
+    transform: translateX(24px);
+  }
+
+  .item[data-visible="true"] {
+    transform: none;
+  }
+
+  /* El nodo queda sobre el eje central, del lado que corresponde */
+  .item[data-side="left"] .node {
+    left: auto;
+    right: calc(-2.75rem - var(--node-size) / 2);
+  }
+
+  .item[data-side="right"] .node {
+    left: calc(-2.75rem - var(--node-size) / 2);
+  }
+}

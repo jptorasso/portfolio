@@ -1,0 +1,261 @@
+/* ==========================================================================
+   Barra de filtros
+   ========================================================================== */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.filters {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+/* Fondo que se desliza hasta el botón activo.
+   --active-index viene del JSX: 0, 1 o 2. Cada paso lo mueve un ancho completo. */
+.indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / 3);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  background: rgba(139, 92, 246, 0.16);
+  transform: translateX(calc(var(--active-index) * 100%));
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.filterButton {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) ease;
+}
+
+.filterButton:hover,
+.filterButton[aria-pressed="true"] {
+  color: var(--color-text);
+}
+
+.filterCount {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-subtle);
+}
+
+.status {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
+/* Punto de nivel: verde para "Domino", azul con pulso para "Aprendiendo" */
+.levelDot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.levelDot[data-level="mastered"] {
+  background: var(--color-success);
+}
+
+.levelDot[data-level="learning"] {
+  background: var(--color-accent-2);
+  animation: learning-pulse 2s ease-in-out infinite;
+}
+
+@keyframes learning-pulse {
+  50% {
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
+  }
+}
+
+/* ==========================================================================
+   Tarjetas de categoría
+   ========================================================================== */
+.grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.cardHeader h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--color-accent-light);
+}
+
+.cardMeta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-subtle);
+}
+
+.cardDescription {
+  margin-bottom: 1.25rem;
+  font-size: 0.925rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Tecnología individual
+   ========================================================================== */
+.techList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.6rem;
+}
+
+.tech {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.02);
+  animation: pop-in 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 45ms);
+  transition:
+    border-color var(--duration) ease,
+    background-color var(--duration) ease;
+}
+
+/* color-mix mezcla el color de cada tecnología con transparencia */
+.tech:hover {
+  border-color: color-mix(in srgb, var(--tech-color) 35%, transparent);
+  background: color-mix(in srgb, var(--tech-color) 6%, transparent);
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--tech-color) 35%, transparent);
+  background: color-mix(in srgb, var(--tech-color) 14%, transparent);
+  color: var(--tech-color);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition:
+    transform var(--duration) var(--ease-out),
+    box-shadow var(--duration) ease;
+}
+
+.tech:hover .logo {
+  transform: scale(1.08) rotate(-5deg);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--tech-color) 35%, transparent);
+}
+
+/* Lo que estoy aprendiendo se distingue con un borde punteado */
+.tech[data-level="learning"] .logo {
+  border-style: dashed;
+}
+
+.techInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.techName {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.techLevel {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--color-text-subtle);
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+/* En celulares angostos no entran los contadores: los ocultamos
+   (el total sigue visible en el texto "mostrando X de Y") */
+@media (max-width: 419px) {
+  .filterButton {
+    gap: 0.35rem;
+    padding-inline: 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  .filterCount {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .filters {
+    width: auto;
+  }
+
+  .filterButton {
+    padding: 0.55rem 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,4 @@
+.projects {
+  position: relative;
+  padding-block: clamp(5rem, 10vw, 8rem);
+}

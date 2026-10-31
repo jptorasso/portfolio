@@ -1,0 +1,122 @@
+.about {
+  position: relative;
+  padding-block: clamp(5rem, 10vw, 8rem);
+}
+
+.grid {
+  display: grid;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+/* ==========================================================================
+   Texto
+   ========================================================================== */
+.text p {
+  font-size: 1.075rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+.text p + p {
+  margin-top: 1.25rem;
+}
+
+.text strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ==========================================================================
+   Estadísticas
+   ========================================================================== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* En el HTML el <dt> (etiqueta) va antes del <dd> (valor), como pide la
+   semántica de <dl>. Con `order` mostramos el número arriba. */
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat dd {
+  order: -1;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums; /* los dígitos ocupan el mismo ancho: el número no "baila" */
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stat dt {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--color-text-subtle);
+}
+
+/* ==========================================================================
+   Tarjetas "Qué aporto"
+   ========================================================================== */
+.cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--color-accent-light);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.card:hover .cardIcon {
+  transform: translateY(-2px) rotate(-6deg);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (min-width: 640px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}

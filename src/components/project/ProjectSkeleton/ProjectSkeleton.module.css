@@ -1,0 +1,52 @@
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  padding-block: calc(var(--nav-height) + 2.5rem) 6rem;
+}
+
+/* Bloque gris con un brillo que lo recorre (efecto "shimmer") */
+.block {
+  display: block;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-surface-hover) 50%, var(--color-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.back {
+  width: 160px;
+  height: 18px;
+}
+
+.eyebrow {
+  width: 180px;
+  height: 16px;
+  margin-top: 2.5rem;
+}
+
+.title {
+  width: min(420px, 80%);
+  height: clamp(2.5rem, 7vw, 4.5rem);
+  margin-top: 0.75rem;
+}
+
+.tagline {
+  width: min(320px, 60%);
+  height: 22px;
+  margin-top: 1rem;
+}
+
+.cover {
+  aspect-ratio: 16 / 10;
+  margin-top: 3rem;
+  border-radius: var(--radius-lg);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}

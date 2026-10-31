@@ -1,0 +1,272 @@
+.form {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.row {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* ==========================================================================
+   Campo
+   ========================================================================== */
+.field {
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.control {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong);
+  background: rgba(7, 7, 12, 0.6);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  transition:
+    border-color var(--duration) ease,
+    box-shadow var(--duration) ease,
+    background-color var(--duration) ease;
+}
+
+.control::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.control:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.control:focus {
+  outline: none;
+  border-color: rgba(167, 139, 250, 0.7);
+  background: rgba(139, 92, 246, 0.05);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+}
+
+textarea.control {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Select con flecha propia (appearance: none quita la del sistema) */
+select.control {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23a1a1b5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  cursor: pointer;
+}
+
+/* Mientras no se eligió una opción, el texto se ve como un placeholder */
+select.control:has(option[value=""]:checked) {
+  color: var(--color-text-subtle);
+}
+
+select.control option {
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+/* Estado válido: borde verde sutil */
+.field[data-valid="true"] .control:not(:focus) {
+  border-color: rgba(52, 211, 153, 0.45);
+}
+
+/* Estado inválido: borde rojo */
+.field[data-invalid="true"] .control {
+  border-color: rgba(248, 113, 113, 0.7);
+}
+
+.field[data-invalid="true"] .control:focus {
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.15);
+}
+
+.error,
+.hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.error {
+  color: #fca5a5;
+  animation: error-in 0.3s var(--ease-out);
+}
+
+.error svg {
+  flex: none;
+  margin-top: 0.1rem;
+}
+
+.hint {
+  color: var(--color-text-subtle);
+}
+
+@keyframes error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Contador de caracteres, en la esquina del textarea */
+.counter {
+  position: absolute;
+  top: 0.15rem;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-subtle);
+}
+
+.counter[data-near-limit="true"] {
+  color: #fbbf24;
+}
+
+/* ==========================================================================
+   Envío
+   ========================================================================== */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 48px;
+  padding: 0 1.6rem;
+  border-radius: var(--radius-full);
+  background: var(--gradient-accent-strong);
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 8px 24px -10px rgba(124, 58, 237, 0.7);
+  transition:
+    transform var(--duration) var(--ease-out),
+    box-shadow var(--duration) var(--ease-out),
+    opacity var(--duration) ease;
+}
+
+.submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -10px rgba(124, 58, 237, 0.85);
+}
+
+.submit:hover:not(:disabled) svg {
+  transform: translate(2px, -2px);
+}
+
+.submit svg {
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.note {
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
+/* ==========================================================================
+   Resultado
+   ========================================================================== */
+.feedback:empty {
+  display: none;
+}
+
+.success {
+  display: flex;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  background: rgba(52, 211, 153, 0.07);
+  color: var(--color-success);
+  animation: error-in 0.4s var(--ease-out);
+}
+
+.success svg {
+  flex: none;
+}
+
+.feedbackTitle {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.feedbackText {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.feedbackText a,
+.errorBanner a {
+  color: var(--color-accent-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resetButton {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.errorBanner {
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  background: rgba(248, 113, 113, 0.07);
+  font-size: 0.875rem;
+  color: #fca5a5;
+}
+
+@media (min-width: 640px) {
+  .row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,110 @@
+.footer {
+  position: relative;
+  padding-block: 3rem;
+  border-top: 1px solid var(--color-border);
+  background: rgba(7, 7, 12, 0.6);
+}
+
+/* Línea de degradado sobre el borde superior */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: min(600px, 80%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.6), transparent);
+  transform: translateX(-50%);
+}
+
+.inner {
+  display: grid;
+  gap: 2rem;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--color-text-subtle);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) ease;
+}
+
+.link:hover {
+  color: var(--color-text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.socials {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-fast) ease,
+    border-color var(--duration) ease,
+    transform var(--duration) var(--ease-out);
+}
+
+.social:hover {
+  color: var(--color-text);
+  border-color: rgba(167, 139, 250, 0.5);
+  transform: translateY(-2px);
+}
+
+.backToTop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) ease;
+}
+
+.backToTop svg {
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.backToTop:hover {
+  color: var(--color-text);
+}
+
+.backToTop:hover svg {
+  transform: translateY(-3px);
+}
+
+@media (min-width: 900px) {
+  .inner {
+    grid-template-columns: 1.2fr 1.5fr auto;
+    align-items: start;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}

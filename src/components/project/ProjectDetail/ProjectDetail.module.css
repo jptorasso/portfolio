@@ -1,0 +1,362 @@
+.page {
+  position: relative;
+  padding-block: calc(var(--nav-height) + 2.5rem) 6rem;
+}
+
+/* Brillo con el color del proyecto en la parte superior */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: -1;
+  height: 600px;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%);
+  pointer-events: none;
+}
+
+/* Animación de entrada al cargar la página */
+.back,
+.header,
+.cover {
+  animation: page-in 0.8s var(--ease-out) both;
+}
+
+.header {
+  animation-delay: 80ms;
+}
+
+.cover {
+  animation-delay: 180ms;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) ease;
+}
+
+.back svg {
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.back:hover {
+  color: var(--color-text);
+}
+
+.back:hover svg {
+  transform: translateX(-4px);
+}
+
+/* ==========================================================================
+   Encabezado
+   ========================================================================== */
+.header {
+  max-width: 820px;
+  margin-top: 2.5rem;
+}
+
+.category {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.title {
+  margin-top: 0.5rem;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+
+.tagline {
+  margin-top: 0.75rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--color-text-muted);
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+}
+
+.techList li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.8rem 0.3rem 0.35rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 0.85rem;
+}
+
+.techLogo {
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding-inline: 0.25rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--tech-color) 15%, transparent);
+  color: var(--tech-color);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+/* ==========================================================================
+   Portada
+   ========================================================================== */
+.cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  margin-top: 3rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--color-border));
+  background: var(--color-bg-elevated);
+  box-shadow: 0 50px 100px -50px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.cover img {
+  object-fit: cover;
+  object-position: top left;
+}
+
+/* Aviso debajo de la portada cuando las imágenes son ilustrativas */
+.notice {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.notice svg {
+  flex: none;
+  margin-top: 0.2rem;
+  color: var(--accent);
+}
+
+.notice a {
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.galleryNote {
+  margin: -0.5rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--color-text-subtle);
+}
+
+/* ==========================================================================
+   Contenido + ficha técnica
+   ========================================================================== */
+.content {
+  display: grid;
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.main {
+  display: grid;
+  gap: 3.5rem;
+  min-width: 0;
+}
+
+.heading {
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.paragraph {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+.paragraph + .paragraph {
+  margin-top: 1rem;
+}
+
+.features {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.features li {
+  display: flex;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.check {
+  flex: none;
+  margin-top: 0.25rem;
+  color: var(--accent);
+}
+
+.details {
+  display: grid;
+  gap: 1rem;
+}
+
+.detailNumber {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.detailTitle {
+  margin-top: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.detailText {
+  margin-top: 0.5rem;
+  font-size: 0.925rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.factSheet {
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.factTitle {
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+.facts {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.facts dt {
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
+.facts dd {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   Galería y navegación entre proyectos
+   ========================================================================== */
+.gallery {
+  margin-top: 5rem;
+}
+
+.pager {
+  display: grid;
+  gap: 1rem;
+  margin-top: 5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.pagerLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition:
+    border-color var(--duration) ease,
+    transform var(--duration) var(--ease-out);
+}
+
+.pagerLink:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border-strong);
+}
+
+.pagerNext {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.pagerLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
+.pagerTitle {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (min-width: 768px) {
+  .details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pager {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* La ficha técnica acompaña el scroll */
+  .sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + 1.5rem);
+  }
+}

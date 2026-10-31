@@ -1,0 +1,28 @@
+.typewriter {
+  display: inline-flex;
+  align-items: center;
+}
+
+.text {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: pre;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  margin-left: 4px;
+  border-radius: 2px;
+  background: var(--color-accent-2);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

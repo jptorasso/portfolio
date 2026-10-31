@@ -1,0 +1,70 @@
+.technologies {
+  position: relative;
+  padding-block: clamp(5rem, 10vw, 8rem);
+  overflow: hidden;
+}
+
+/* Brillo difuso detrás de la sección */
+.technologies::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  z-index: -1;
+  width: min(900px, 100%);
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(109, 40, 217, 0.12), transparent 65%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Marquesina infinita
+   ========================================================================== */
+.marquee {
+  margin-top: 4rem;
+  overflow: hidden;
+  /* Los bordes se desvanecen para que los elementos "entren" y "salgan" suavemente */
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.track {
+  --gap: 1rem;
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+.marqueeItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+}
+
+.marqueeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tech-color);
+  box-shadow: 0 0 10px var(--tech-color);
+}
+
+/* La lista está duplicada: al desplazarla la mitad (más medio gap),
+   la segunda copia queda exactamente donde empezó la primera. */
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
+}

@@ -1,0 +1,176 @@
+.contact {
+  position: relative;
+  padding-block: clamp(5rem, 10vw, 8rem);
+  overflow: hidden;
+}
+
+/* Brillo de cierre al pie de la página */
+.contact::before {
+  content: "";
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  z-index: -1;
+  width: min(1000px, 120%);
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(109, 40, 217, 0.18), transparent 65%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* ==========================================================================
+   Canales de contacto
+   ========================================================================== */
+.channels {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+}
+
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: fit-content;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  background: rgba(52, 211, 153, 0.06);
+  font-size: 0.85rem;
+  color: #a7f3d0;
+}
+
+.availabilityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 12px var(--color-success);
+}
+
+.channelList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.channel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition:
+    border-color var(--duration) ease,
+    transform var(--duration) var(--ease-out),
+    background-color var(--duration) ease;
+}
+
+.channel:hover {
+  transform: translateY(-3px);
+  border-color: rgba(167, 139, 250, 0.4);
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.channelIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--color-accent-light);
+}
+
+.channelBody {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.channelLabel {
+  font-size: 0.78rem;
+  color: var(--color-text-subtle);
+}
+
+.channelValue {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* Los enlaces a redes cubren toda la tarjeta (mismo truco que en ProjectCard) */
+.channelLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.channelArrow {
+  flex: none;
+  color: var(--color-text-subtle);
+  transition:
+    transform var(--duration) var(--ease-out),
+    color var(--duration) ease;
+}
+
+.channel:hover .channelArrow {
+  transform: translateX(4px);
+  color: var(--color-text);
+}
+
+/* ---------- Botón copiar ---------- */
+.copyButton {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-strong);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.copyButton:hover {
+  color: var(--color-text);
+  border-color: rgba(167, 139, 250, 0.5);
+}
+
+.copyButton[data-state="copied"] {
+  color: var(--color-success);
+  border-color: rgba(52, 211, 153, 0.5);
+  background: rgba(52, 211, 153, 0.08);
+}
+
+.copyButton[data-state="error"] {
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.5);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 3rem;
+    align-items: start;
+  }
+}

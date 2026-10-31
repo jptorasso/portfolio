@@ -1,0 +1,272 @@
+/* ==========================================================================
+   Header fijo
+   ========================================================================== */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-height);
+  transition: height var(--duration) var(--ease-out);
+}
+
+/* El fondo "vidrio" va en un pseudo-elemento y no en el header:
+   backdrop-filter crea un nuevo contexto para los elementos `position: fixed`
+   que estén adentro, y eso rompería el menú móvil a pantalla completa. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(7, 7, 12, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid var(--color-border);
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.scrolled {
+  height: 64px;
+}
+
+.scrolled::before {
+  opacity: 1;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Barra de progreso de lectura */
+.progress {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--gradient-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Logo
+   ========================================================================== */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  padding: 0.25rem 0;
+}
+
+.bracket {
+  color: var(--color-accent-light);
+  white-space: pre;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+/* Microinteracción: los "< />" se separan al pasar el mouse */
+.logo:hover .bracket:first-child {
+  transform: translateX(-4px);
+}
+
+.logo:hover .bracket:last-child {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Enlaces de escritorio
+   ========================================================================== */
+.links {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.925rem;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.link:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface-hover);
+}
+
+/* Punto indicador debajo del enlace activo */
+.link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.15rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  transform: translateX(-50%) scale(0);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.link[aria-current="location"] {
+  color: var(--color-text);
+}
+
+.link[aria-current="location"]::after {
+  transform: translateX(-50%) scale(1);
+}
+
+/* ==========================================================================
+   Botón hamburguesa
+   ========================================================================== */
+.menuButton {
+  position: relative;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition:
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.menuButton:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-hover);
+}
+
+.bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-text);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+/* Las dos barras forman una X: cada una baja/sube 4px (mitad del gap + alto) y rota */
+.menuButtonOpen .bar:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.menuButtonOpen .bar:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Menú móvil (pantalla completa)
+   ========================================================================== */
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--nav-height) + 2rem) var(--container-padding) 2.5rem;
+  background: rgba(7, 7, 12, 0.985);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--duration) var(--ease-out),
+    visibility var(--duration);
+}
+
+.mobileMenuOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobileLinks li {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+/* Aparición escalonada: cada enlace espera según su posición (--index) */
+.mobileMenuOpen .mobileLinks li {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(80ms + var(--index) * 50ms);
+}
+
+.mobileLink {
+  display: block;
+  padding: 0.6rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-fast) ease,
+    transform var(--duration) var(--ease-out);
+}
+
+.mobileLink:hover,
+.mobileLink[aria-current="location"] {
+  color: var(--color-text);
+  transform: translateX(6px);
+}
+
+.mobileLink[aria-current="location"] {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.mobileFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 12px var(--color-success);
+}
+
+/* ==========================================================================
+   Escritorio
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .links {
+    display: flex;
+  }
+
+  .menuButton,
+  .mobileMenu {
+    display: none;
+  }
+}

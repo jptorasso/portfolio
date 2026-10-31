@@ -1,0 +1,146 @@
+/* El marco de 1px con degradado simula un borde que brilla */
+.frame {
+  position: relative;
+  padding: 1px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(140deg, rgba(167, 139, 250, 0.55), rgba(255, 255, 255, 0.06) 40%, rgba(96, 165, 250, 0.45));
+  box-shadow: 0 40px 80px -30px rgba(76, 29, 149, 0.55);
+  animation: hover-float 7s ease-in-out infinite;
+  transition: box-shadow var(--duration-slow) var(--ease-out);
+}
+
+.frame:hover {
+  box-shadow: 0 50px 100px -30px rgba(109, 40, 217, 0.75);
+}
+
+.window {
+  overflow: hidden;
+  border-radius: calc(var(--radius-lg) - 1px);
+  background: rgba(14, 14, 23, 0.92);
+  backdrop-filter: blur(10px);
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-subtle);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #2b2b3b;
+}
+
+.dots span:nth-child(1) {
+  background: #f87171;
+}
+
+.dots span:nth-child(2) {
+  background: #fbbf24;
+}
+
+.dots span:nth-child(3) {
+  background: #34d399;
+}
+
+.fileName {
+  color: var(--color-text-muted);
+}
+
+.tag {
+  margin-left: auto;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(139, 92, 246, 0.12);
+  color: var(--color-accent-light);
+}
+
+.code {
+  padding: 1.25rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.75;
+  counter-reset: line;
+  overflow-x: auto;
+}
+
+/* Números de línea generados con un contador CSS */
+.line {
+  display: block;
+  min-height: 1.75em;
+  padding-right: 1.25rem;
+  white-space: pre;
+}
+
+.line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2.75rem;
+  padding-right: 1rem;
+  text-align: right;
+  color: #3d3d52;
+}
+
+.line:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* Colores de sintaxis */
+.kw {
+  color: #c4b5fd;
+}
+
+.type {
+  color: #67e8f9;
+}
+
+.fn {
+  color: #93c5fd;
+}
+
+.str {
+  color: #86efac;
+}
+
+.cm {
+  color: #5c5c75;
+  font-style: italic;
+}
+
+.pl {
+  color: #d4d4e0;
+}
+
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1.1rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-subtle);
+}
+
+.statusOk {
+  color: var(--color-success);
+}
+
+@keyframes hover-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
